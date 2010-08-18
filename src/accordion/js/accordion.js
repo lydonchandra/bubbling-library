@@ -122,7 +122,7 @@
 	    });
 
         // creating the most common message (behavior layer)
-        $B.addLayer (['accordionOpenItem', 'accordionCloseItem', 'accordionRemoveItem'], obj);
+        $B.addLayer (['accordionOpenItem', 'accordionBeforeAnimCloseItem', 'accordionCloseItem', 'accordionRemoveItem'], obj);
 
         function _getEffect ( el ) {
             var effect = el.getAttribute('rel') || null;
@@ -295,6 +295,7 @@
     	        if (!list.manually) {
     	          conf.scroll = {to: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]])};
     	        }
+          	$B.fire ('accordionBeforeAnimCloseItem', item);
                 // if the animation is underway: we need to stop it...
                 anim = _anims[$E.generateId(item.slide)];
                 if ((anim) && (anim.isAnimated())) {anim.stop();}
